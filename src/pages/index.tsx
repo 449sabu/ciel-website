@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { Text, Center, createStyles, Stack } from "@mantine/core";
+import { Text, Center, Stack } from "@mantine/core";
 
 export default function Home() {
-	const { classes } = useStyles();
 	return (
 		<>
 			<Head>
@@ -17,17 +16,12 @@ export default function Home() {
 						<Text fz="14rem" fw="bold" ta="center" className={"fontNm"}>
 							CIEL
 						</Text>
-						<Text fz="6rem" fw="bold" ta="center" className={"fontNm"}>Coming Soon</Text>
+						<Text fz="6rem" fw="bold" ta="center" className={"fontNm"}>
+							Coming Soon
+						</Text>
 					</Stack>
 				</Center>
 			</main>
 		</>
 	);
 }
-
-const useStyles = createStyles((theme) => ({
-	fontNm: {
-		color: "#F0F0F0",
-		textShadow: "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
-	},
-}));
