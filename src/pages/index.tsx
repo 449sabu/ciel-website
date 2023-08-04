@@ -11,7 +11,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Center h="100vh">
+				<Center h="80vh">
 					<Stack>
 						<Text fz="14rem" fw="bold" ta="center" className={"fontNm"}>
 							CIEL

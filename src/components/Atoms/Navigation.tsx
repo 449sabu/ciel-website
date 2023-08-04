@@ -1,7 +1,6 @@
-import { Button, UnstyledButton, Stack, createStyles } from "@mantine/core";
-import { Home2, Help, MessageCircle, ChevronRight } from "tabler-icons-react";
+import { Button, Stack, createStyles } from "@mantine/core";
+import { Home2, Help, MessageCircle } from "tabler-icons-react";
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/router";
 
 interface NavbarLinkProps {
@@ -40,9 +39,7 @@ const links = [
 
 const Navigation = () => {
 	const { classes, cx } = useStyles();
-	const [active, setActive] = useState(1);
 	const router = useRouter();
-	console.log(router.route);
 
 	return (
 		<Stack>
@@ -52,12 +49,10 @@ const Navigation = () => {
 					key={link.label}
 					href={link.href}
 					disabled={link.disabled}
-          leftIcon={<link.icon />}
-					// active={router.route === link.href}
-					// variant="subtle"
-					// className={cx(classes.link)}
-					onClick={() => setActive(index)}
-					className={cx(classes.link, { [classes.active]: active === index })}
+					leftIcon={<link.icon />}
+					className={cx(classes.link, {
+						[classes.active]: router.route === link.href,
+					})}
 				>
 					{link.label}
 				</Button>
@@ -87,8 +82,11 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	active: {
-		backgroundColor: theme.colorScheme === "dark" ? "rgb(43,47,55)" : "#F0F0F0",
-		boxShadow: "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
+		backgroundColor: theme.colorScheme === "dark" ? "rgb(42,44,49)" : "#F0F0F0",
+		boxShadow:
+			theme.colorScheme === "dark"
+				? "6px 6px 12px #2A2D32, -6px -6px 12px #3O343A"
+				: "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
 		color: "orange",
 
 		// "&, &:hover": {

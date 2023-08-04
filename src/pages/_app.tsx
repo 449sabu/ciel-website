@@ -1,14 +1,25 @@
 import type { AppProps } from "next/app";
-import { useState } from 'react';
 import Head from "next/head";
-import { MantineProvider, ColorSchemeProvider, ColorScheme } from "@mantine/core";
-import Layout from "@/components/Layout";
+import {
+	MantineProvider,
+	ColorSchemeProvider,
+	ColorScheme,
+} from "@mantine/core";
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import Layout from "@/components/Templates/Layout";
 
 export default function App(props: AppProps) {
 	const { Component, pageProps } = props;
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+	// local storage を使用したテーマの保存
+	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+		key: "mantine-color-scheme",
+		defaultValue: "light",
+		getInitialValueInEffect: true,
+	});
+	const toggleColorScheme = (value?: ColorScheme) =>
+		setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+	useHotkeys([["mod+J", () => toggleColorScheme()]]);
 
 	return (
 		<>
@@ -19,31 +30,41 @@ export default function App(props: AppProps) {
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
 			</Head>
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-			<MantineProvider
-				withGlobalStyles
-				withNormalizeCSS
-				theme={{
-					// colorScheme: "light",
-					globalStyles: (theme) => ({
-						body: {
-							backgroundColor:
-								theme.colorScheme === "dark" ? "rgb(43,47,55)" : "#F0F0F0",
-              // maxWidth: "80rem",
-              // margin: "auto"
-						},
-						".fontNm": {
-							color: "#F0F0F0",
-							textShadow: "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
-						},
-					}),
-				}}
+			<ColorSchemeProvider
+				colorScheme={colorScheme}
+				toggleColorScheme={toggleColorScheme}
 			>
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
-			</MantineProvider>
-      </ColorSchemeProvider>
+				<MantineProvider
+					withGlobalStyles
+					withNormalizeCSS
+					theme={{
+						colorScheme,
+						colors: {
+							"nm-light": ["#F0F0F0"],
+							"nm-dark": ["#7AD1DD"]
+						},
+						globalStyles: (theme) => ({
+							body: {
+								backgroundColor:
+									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+							},
+							".fontNm": {
+								backgroundColor:
+									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+								color:
+									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+								textShadow: 
+                theme.colorScheme === "dark" ? "6px 6px 14px #1b1e22, -6px -6px 14px #373c43" :
+                "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
+							},
+						}),
+					}}
+				>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</MantineProvider>
+			</ColorSchemeProvider>
 		</>
 	);
 }

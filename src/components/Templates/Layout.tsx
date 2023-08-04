@@ -7,21 +7,25 @@ import {
 	MediaQuery,
 	Burger,
 	useMantineTheme,
+	Group,
+	useMantineColorScheme,
 } from "@mantine/core";
-import Navigation from "./Navigation";
+import Navigation from "../Atoms/Navigation";
+import ColorSchemeToggle from "../Atoms/ColorSchemeToggle";
 
 type LayoutProps = Required<{
 	readonly children: ReactElement | null;
 }>;
 
 const Layout = ({ children }: LayoutProps) => {
+	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 	const theme = useMantineTheme();
 	const [opened, setOpened] = useState(false);
+	const dark = colorScheme === "dark";
 
 	return (
 		<AppShell
 			// layout="alt"
-			bg="#F0F0F0"
 			padding="md"
 			navbarOffsetBreakpoint="sm"
 			asideOffsetBreakpoint="sm"
@@ -31,8 +35,8 @@ const Layout = ({ children }: LayoutProps) => {
 					hiddenBreakpoint="sm"
 					hidden={!opened}
 					width={{ sm: 200, lg: 300 }}
+					bg={dark ? "rgb(41,45,50)" : "#F0F0F0"}
 					style={{
-            backgroundColor: "#F0F0F0",
 						border: "none",
 					}}
 				>
@@ -42,32 +46,28 @@ const Layout = ({ children }: LayoutProps) => {
 				</Navbar>
 			}
 			header={
-				// <MediaQuery largerThan="sm" styles={{ display: "none" }}>
 				<Header
-					height={{ base: 50, md: 70 }}
-					p="md"
+					height={{ base: 50, md: 100 }}
+					px="xl"
+					bg={dark ? "rgb(41,45,50)" : "#F0F0F0"}
 					style={{
-            // backgroundColor: "#F0F0F0",
-            backgroundColor: "green",
 						border: "none",
 					}}
 				>
-					<div
-						style={{ display: "flex", alignItems: "center", height: "100%" }}
-					>
-						<MediaQuery largerThan="sm" styles={{ display: "none" }}>
-							<Burger
-								opened={opened}
-								onClick={() => setOpened((o) => !o)}
-								size="sm"
-								color={theme.colors.gray[6]}
-								mr="xl"
-							/>
-						</MediaQuery>
-						<Text>CIEL Official website</Text>
-					</div>
+					<MediaQuery largerThan="sm" styles={{ display: "none" }}>
+						<Burger
+							opened={opened}
+							onClick={() => setOpened((o) => !o)}
+							size="sm"
+							color={theme.colors.gray[6]}
+							mr="xl"
+						/>
+					</MediaQuery>
+						<Group position="apart" h={"100%"}>
+							<Text>CIEL Official website</Text>
+							<ColorSchemeToggle />
+						</Group>
 				</Header>
-				// </MediaQuery>
 			}
 		>
 			{children}
