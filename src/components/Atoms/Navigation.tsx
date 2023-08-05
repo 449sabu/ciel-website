@@ -4,7 +4,7 @@ import {
 	Stack,
 	createStyles,
 } from "@mantine/core";
-import { Home2, Help, MessageCircle } from "tabler-icons-react";
+import { Home2, Help, MessageCircle, Book } from "tabler-icons-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -107,6 +107,12 @@ const links = [
 		label: "About",
 		icon: Home2,
 		href: "/about",
+		disabled: false,
+	},
+	{
+		label: "Blogs",
+		icon: Book,
+		href: "/blog",
 		disabled: false,
 	},
 	{

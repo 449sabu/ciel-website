@@ -40,8 +40,14 @@ export default function App(props: AppProps) {
 					theme={{
 						colorScheme,
 						colors: {
-							"nmLight": ["#F0F0F0"],
-							"nmDark": ["rgb(41,45,50)"],
+							nmLight: ["#F0F0F0"],
+							nmDark: ["rgb(41,45,50)"],
+						},
+						shadows: {
+							outLight: "5px 5px 5px #b6b6b6, -5px -5px 5px #ffffff",
+							inLight: "inset 6px 6px 5px #d3d3d3, inset -6px -6px 5px #ffffff",
+							outDark: "5px 5px 6px #1c1f22, -5px -5px 6px #363b42",
+							inDark: "inset 5px 5px 6px #1b1e22, inset -5px -5px 6px #373c43",
 						},
 						// primaryShade: { light: 6, dark: 8 },
 						globalStyles: (theme) => ({
@@ -58,7 +64,7 @@ export default function App(props: AppProps) {
 									theme.colorScheme === "dark"
 										? "6px 6px 14px #1b1e22, -6px -6px 14px #373c43"
 										: "6px 6px 5px #d3d3d3, -6px -6px 5px #ffffff",
-										// : "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
+								// : "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
 							},
 						}),
 					}}

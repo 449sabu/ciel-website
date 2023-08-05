@@ -14,12 +14,13 @@ const ColorSchemeToggle = () => {
 
 	return (
 		<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-		<Group position="center" my="xl">
+		<Group position="center">
 			<SegmentedControl
 				color={dark ? "nmDark" : "nmLight"}
 				radius="lg"
 				sx={(theme) => ({
 					borderRadius: theme.radius.lg,
+					padding: "0",
 					backgroundColor: dark ? "rgb(41,45,50)" : "#F0F0F0",
 					boxShadow: dark
 						? "6px 6px 14px #1b1e22, -6px -6px 14px #373c43"

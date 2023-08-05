@@ -1,7 +1,12 @@
 import Head from "next/head";
-import { Text, Center, Stack } from "@mantine/core";
+import { Text, Center, Stack, Box, Button, UnstyledButton } from "@mantine/core";
+import { useClipboard } from "@mantine/hooks";
+import { Copy, Check} from 'tabler-icons-react'
+import BorderBox from "@/components/Atoms/BorderBox";
 
 export default function Home() {
+	const clipboard = useClipboard({ timeout: 500 });
+
 	return (
 		<>
 			<Head>
@@ -14,16 +19,29 @@ export default function Home() {
 				<Center h="80vh">
 					<Stack>
 						<Text
-							fz={{ base: "8rem", lg: "14rem",  }}
+							fz={{ base: "8rem", lg: "14rem" }}
 							fw="bold"
 							ta="center"
 							className={"fontNm"}
 						>
 							CIEL
 						</Text>
-						<Text fz={{ base: "3rem", lg: "6rem",  }} fw="bold" ta="center" className={"fontNm"}>
+						<BorderBox>
+							<Box m="2rem" w={{ base: "15rem", sm: "100%"}} style={{overflowWrap: "break-word"}}>
+								<Text fz={{ base: "sm" }}>Ticker : CIEL</Text>
+								<Text fz={{ base: "sm"}}>
+									Pool ID : pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg
+								</Text>
+								<UnstyledButton
+									onClick={() => clipboard.copy("pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg")}
+								>
+									{clipboard.copied ? <Check size={"1rem"}/> : <Copy size={"1rem"}/>}
+								</UnstyledButton>
+							</Box>
+						</BorderBox>
+						{/* <Text fz={{ base: "3rem", lg: "6rem",  }} fw="bold" ta="center" className={"fontNm"}>
 							Coming Soon
-						</Text>
+						</Text> */}
 					</Stack>
 				</Center>
 			</main>

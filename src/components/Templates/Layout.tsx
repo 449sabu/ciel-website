@@ -48,7 +48,7 @@ const Layout = ({ children }: LayoutProps) => {
 			}
 			header={
 				<Header
-					height={{ base: 50, md: 100 }}
+					height={{ base: 60, md: 100 }}
 					px="xl"
 					bg={dark ? "rgb(41,45,50)" : "#F0F0F0"}
 					style={{
@@ -56,18 +56,27 @@ const Layout = ({ children }: LayoutProps) => {
 					}}
 				>
 					<MediaQuery largerThan="sm" styles={{ display: "none" }}>
-						<Burger
-							opened={opened}
-							onClick={() => setOpened((o) => !o)}
-							size="sm"
-							color={theme.colors.gray[6]}
-							mr="xl"
-						/>
+						<Group position="right" h={"100%"}>
+							<Burger
+								opened={opened}
+								onClick={() => setOpened((o) => !o)}
+								size="md"
+								color={theme.colors.gray[6]}
+								sx={(theme) => ({
+									marginTop: "1rem",
+									backgroundColor:
+										theme.colorScheme === "dark"
+											? theme.colors.nmDark
+											: theme.colors.nmLight,
+									boxShadow:
+										theme.colorScheme === "dark"
+											? "5px 5px 6px #1c1f22, -5px -5px 6px #363b42"
+											: "5px 5px 5px #b6b6b6, -5px -5px 5px #ffffff",
+								})}
+							/>
+						</Group>
 					</MediaQuery>
-					<Group position="apart" h={"100%"}>
-						<MediaQuery smallerThan="md" styles={{ display: "none" }}>
-							<Text>CIEL Official website</Text>
-						</MediaQuery>
+					<Group position="right" h={"100%"}>
 						<ColorSchemeToggle />
 					</Group>
 				</Header>
