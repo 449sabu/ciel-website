@@ -13,10 +13,15 @@ export default function Home() {
 			<main>
 				<Center h="80vh">
 					<Stack>
-						<Text fz="14rem" fw="bold" ta="center" className={"fontNm"}>
+						<Text
+							fz={{ base: "8rem", lg: "14rem",  }}
+							fw="bold"
+							ta="center"
+							className={"fontNm"}
+						>
 							CIEL
 						</Text>
-						<Text fz="6rem" fw="bold" ta="center" className={"fontNm"}>
+						<Text fz={{ base: "3rem", lg: "6rem",  }} fw="bold" ta="center" className={"fontNm"}>
 							Coming Soon
 						</Text>
 					</Stack>

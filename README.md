@@ -19,3 +19,11 @@ Ticker  : CIEL
 Pool ID : pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg  
 
 [Cexplorer](https://cexplorer.io/pool/pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg)
+
+## デザイン
+### コンセプト
+- ニューモーフィズム
+
+### カラーモード
+- ダーク: https://neumorphism.io/#292D32
+- ライト: https://neumorphism.io/#F0F0F0

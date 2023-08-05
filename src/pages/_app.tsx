@@ -40,9 +40,10 @@ export default function App(props: AppProps) {
 					theme={{
 						colorScheme,
 						colors: {
-							"nm-light": ["#F0F0F0"],
-							"nm-dark": ["rgb(41,45,50)"],
+							"nmLight": ["#F0F0F0"],
+							"nmDark": ["rgb(41,45,50)"],
 						},
+						// primaryShade: { light: 6, dark: 8 },
 						globalStyles: (theme) => ({
 							body: {
 								backgroundColor:
@@ -56,7 +57,8 @@ export default function App(props: AppProps) {
 								textShadow:
 									theme.colorScheme === "dark"
 										? "6px 6px 14px #1b1e22, -6px -6px 14px #373c43"
-										: "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
+										: "6px 6px 5px #d3d3d3, -6px -6px 5px #ffffff",
+										// : "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
 							},
 						}),
 					}}

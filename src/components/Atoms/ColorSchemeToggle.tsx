@@ -4,22 +4,19 @@ import {
 	Group,
 	Center,
 	Box,
-	createStyles,
+	MediaQuery,
 } from "@mantine/core";
 import { Sun, Moon } from "tabler-icons-react";
-
-const useStayles = createStyles((theme) => ({
-	button: {},
-}));
 
 const ColorSchemeToggle = () => {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 	const dark = colorScheme === "dark";
 
 	return (
+		<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
 		<Group position="center" my="xl">
 			<SegmentedControl
-				color={dark ? "nm-dark" : "nm-light"}
+				color={dark ? "nmDark" : "nmLight"}
 				radius="lg"
 				sx={(theme) => ({
 					borderRadius: theme.radius.lg,
@@ -42,7 +39,7 @@ const ColorSchemeToggle = () => {
 									backgroundColor: dark ? "rgb(41,45,50)" : "#F0F0F0",
 									boxShadow: dark
 										? ""
-										: "inset 3px 3px 12px #868686, inset -3px -3px 12px #ffffff",
+										: "inset 6px 6px 5px #d3d3d3, inset -6px -6px 5px #ffffff",
 								})}
 							>
 								<Sun size="1rem" />
@@ -72,6 +69,7 @@ const ColorSchemeToggle = () => {
 				]}
 			/>
 		</Group>
+		</MediaQuery>
 	);
 };
 

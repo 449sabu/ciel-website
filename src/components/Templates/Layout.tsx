@@ -34,10 +34,11 @@ const Layout = ({ children }: LayoutProps) => {
 					p="md"
 					hiddenBreakpoint="sm"
 					hidden={!opened}
-					width={{ sm: 200, lg: 300 }}
+					width={{ sm: 200, lg: "14rem" }}
 					bg={dark ? "rgb(41,45,50)" : "#F0F0F0"}
 					style={{
 						border: "none",
+						// justifyContent: "center",
 					}}
 				>
 					<Navbar.Section>
@@ -63,10 +64,12 @@ const Layout = ({ children }: LayoutProps) => {
 							mr="xl"
 						/>
 					</MediaQuery>
-						<Group position="apart" h={"100%"}>
+					<Group position="apart" h={"100%"}>
+						<MediaQuery smallerThan="md" styles={{ display: "none" }}>
 							<Text>CIEL Official website</Text>
-							<ColorSchemeToggle />
-						</Group>
+						</MediaQuery>
+						<ColorSchemeToggle />
+					</Group>
 				</Header>
 			}
 		>
