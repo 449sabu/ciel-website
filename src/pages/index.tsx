@@ -1,8 +1,15 @@
 import Head from "next/head";
-import { Text, Center, Stack, Box, Button, UnstyledButton } from "@mantine/core";
+import {
+	Text,
+	Center,
+	Stack,
+	Box,
+	UnstyledButton,
+	Group,
+} from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
-import { Copy, Check} from 'tabler-icons-react'
-import BorderBox from "@/components/Atoms/BorderBox";
+import { Copy, Check } from "tabler-icons-react";
+import StakingButton from "@/components/Atoms/StakingButton";
 
 export default function Home() {
 	const clipboard = useClipboard({ timeout: 500 });
@@ -26,22 +33,41 @@ export default function Home() {
 						>
 							CIEL
 						</Text>
-						<BorderBox>
-							<Box m="2rem" w={{ base: "15rem", sm: "100%"}} style={{overflowWrap: "break-word"}}>
-								<Text fz={{ base: "sm" }}>Ticker : CIEL</Text>
-								<Text fz={{ base: "sm"}}>
-									Pool ID : pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg
-								</Text>
+						<Box
+							style={{ overflowWrap: "break-word" }}
+							className="nmOutline"
+							sx={(theme) => ({
+								margin: "auto",
+								width: "100%",
+								padding: "2rem",
+								borderRadius: theme.radius.lg,
+								[theme.fn.smallerThan("sm")]: {
+									width: "20rem",
+								},
+							})}
+						>
+							<Text fz={{ base: "sm" }}>Ticker : CIEL</Text>
+							<Group position="left" spacing="xs">
+								<Text fz={{ base: "sm" }}>Pool ID :</Text>
 								<UnstyledButton
-									onClick={() => clipboard.copy("pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg")}
+									onClick={() =>
+										clipboard.copy(
+											"pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg"
+										)
+									}
 								>
-									{clipboard.copied ? <Check size={"1rem"}/> : <Copy size={"1rem"}/>}
+									{clipboard.copied ? (
+										<Check size={"1rem"} />
+									) : (
+										<Copy size={"1rem"} />
+									)}
 								</UnstyledButton>
-							</Box>
-						</BorderBox>
-						{/* <Text fz={{ base: "3rem", lg: "6rem",  }} fw="bold" ta="center" className={"fontNm"}>
-							Coming Soon
-						</Text> */}
+							</Group>
+							<Text fz={{ base: "sm" }}>
+								pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg
+							</Text>
+								<StakingButton />
+						</Box>
 					</Stack>
 				</Center>
 			</main>

@@ -10,7 +10,7 @@ import {
 	Group,
 	useMantineColorScheme,
 } from "@mantine/core";
-import Navigation from "../Atoms/Navigation";
+import Navigation from "../Molecules/Navigation";
 import ColorSchemeToggle from "../Atoms/ColorSchemeToggle";
 
 type LayoutProps = Required<{
