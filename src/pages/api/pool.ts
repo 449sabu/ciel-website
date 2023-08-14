@@ -26,7 +26,7 @@ export default async function handler(
 			const exMetadata: ExMetadata = await fetch(metadata.extended)
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);
+					// console.log(data);
 					return data;
 				});
 

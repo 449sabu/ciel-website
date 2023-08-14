@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
 	MantineProvider,
 	ColorSchemeProvider,
@@ -11,6 +12,9 @@ import Layout from "@/components/Templates/Layout";
 
 export default function App(props: AppProps) {
 	const { Component, pageProps } = props;
+
+	// Tanstack Query
+	const queryClient = new QueryClient()
 
 	// local storage を使用したテーマの保存
 	const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -31,6 +35,7 @@ export default function App(props: AppProps) {
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
 			</Head>
+			<QueryClientProvider client={queryClient}>
 			<ColorSchemeProvider
 				colorScheme={colorScheme}
 				toggleColorScheme={toggleColorScheme}
@@ -95,6 +100,7 @@ export default function App(props: AppProps) {
 					</Layout>
 				</MantineProvider>
 			</ColorSchemeProvider>
+			</QueryClientProvider>
 		</>
 	);
 }

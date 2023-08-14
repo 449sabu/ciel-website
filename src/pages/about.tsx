@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import {
 	Container,
 	Text,
@@ -7,7 +6,7 @@ import {
 	Card,
 	SimpleGrid,
 } from "@mantine/core";
-import { HeartHandshake, Icon, IconProps } from "tabler-icons-react";
+import { HeartHandshake, Icon } from "tabler-icons-react";
 
 const About = () => {
 	return (

@@ -1,15 +1,21 @@
 import { Container, Text, Box, Timeline, Button } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import ConnectWallet from "@/components/Atoms/ConnectWallet";
 import DelegationSteps from "@/components/Organisms/DelegationSteps";
 import { useStore } from "@/libs/zustand/store";
-import { fetchDelegationPool } from "@/libs/fetch";
-import { notifications } from "@mantine/notifications";
+import { fetchDelegationPool, fetchKoiosPoolInfo } from "@/libs/fetch";
 
 const Staking = () => {
 	const pool_id = process.env.NEXT_PUBLIC_POOL_ID || "";
 	const setMyPool = useStore((state) => state.setMyPool);
 	const connecting = useStore((state) => state.connecting);
+
+	const { data } = useQuery({
+		queryKey: ["thisPool", pool_id],
+		queryFn: ({ queryKey }) => fetchKoiosPoolInfo(queryKey[1]),
+	});
 
 	useEffect(() => {
 		const myPoolInformation = async () => {
@@ -62,6 +68,9 @@ const Staking = () => {
 					</Timeline.Item>
 					<Timeline.Item title="委任する。" bulletSize={24}>
 						<DelegationSteps />
+						<Button onClick={() => console.log(JSON.stringify(data, null, 2))}>
+							console
+						</Button>
 					</Timeline.Item>
 				</Timeline>
 			</Box>
