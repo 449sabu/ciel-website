@@ -1,18 +1,17 @@
 import Head from "next/head";
 import {
 	Text,
-	Center,
-	Stack,
 	Box,
 	UnstyledButton,
 	Group,
+	Container,
 } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
 import { Copy, Check } from "tabler-icons-react";
-import StakingButton from "@/components/Atoms/StakingButton";
 
 export default function Home() {
 	const clipboard = useClipboard({ timeout: 500 });
+	const pool_id = process.env.NEXT_PUBLIC_POOL_ID || "";
 
 	return (
 		<>
@@ -23,53 +22,42 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Center h="80vh">
-					<Stack>
-						<Text
-							fz={{ base: "8rem", lg: "14rem" }}
-							fw="bold"
-							ta="center"
-							className={"fontNm"}
-						>
-							CIEL
-						</Text>
-						<Box
-							style={{ overflowWrap: "break-word" }}
-							className="nmOutline"
-							sx={(theme) => ({
-								margin: "auto",
-								width: "100%",
-								padding: "2rem",
-								borderRadius: theme.radius.lg,
-								[theme.fn.smallerThan("sm")]: {
-									width: "20rem",
-								},
-							})}
-						>
-							<Text fz={{ base: "sm" }}>Ticker : CIEL</Text>
-							<Group position="left" spacing="xs">
-								<Text fz={{ base: "sm" }}>Pool ID :</Text>
-								<UnstyledButton
-									onClick={() =>
-										clipboard.copy(
-											"pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg"
-										)
-									}
-								>
-									{clipboard.copied ? (
-										<Check size={"1rem"} />
-									) : (
-										<Copy size={"1rem"} />
-									)}
-								</UnstyledButton>
-							</Group>
-							<Text fz={{ base: "sm" }}>
-								pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg
-							</Text>
-								<StakingButton />
-						</Box>
-					</Stack>
-				</Center>
+				<Container>
+					<Text
+						h={"18rem"}
+						fz={{ base: "8rem", lg: "12rem" }}
+						fw="bold"
+						ta="center"
+						className={"nmFont"}
+					>
+						CIEL
+					</Text>
+					<Box
+						style={{ overflowWrap: "break-word" }}
+						className="nmOutline"
+						sx={(theme) => ({
+							margin: "auto",
+							width: "42rem",
+							padding: "2rem",
+							borderRadius: theme.radius.lg,
+							[theme.fn.smallerThan("sm")]: {
+								width: "20rem",
+							},
+						})}
+					>
+						<Text>Ticker : CIEL</Text>
+						<Group position="left" spacing="xs">
+							<Text>Pool ID : {pool_id}</Text>
+							<UnstyledButton onClick={() => clipboard.copy(pool_id)}>
+								{clipboard.copied ? (
+									<Check size={"1rem"} />
+								) : (
+									<Copy size={"1rem"} />
+								)}
+							</UnstyledButton>
+						</Group>
+					</Box>
+				</Container>
 			</main>
 		</>
 	);

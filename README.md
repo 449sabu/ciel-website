@@ -30,8 +30,18 @@ Pool ID : pool13qppafmw3vq5rl4ewmxv7zy84x3rshx9sdczs0zq40cxu0dqkrg -->
 ### コンセプト
 
 - ニューモーフィズム
+  - ダーク: https://neumorphism.io/#292D32
+  - ライト: https://neumorphism.io/#F0F0F0
 
-### カラーモード
+| スタック | ライブラリ | 
+| ---- | ---- |
+| 状態管理 | [Zustand](https://github.com/pmndrs/zustand) |
+| Wallet Connect .etc | [Lucid](https://lucid.spacebudz.io/) |
+| Cardano Onchain API | [Blockfrost](https://blockfrost.io/#introduction) |
+| Icon | [tabler ICON](https://tabler-icons-react.vercel.app/) |
 
-- ダーク: https://neumorphism.io/#292D32
-- ライト: https://neumorphism.io/#F0F0F0
+
+## CIP
+### CIP-30
+ - [CARDANO | CANIUSE](https://www.cardano-caniuse.io/)  
+ - https://github.com/cardano-foundation/CIPs/tree/master/CIP-0030

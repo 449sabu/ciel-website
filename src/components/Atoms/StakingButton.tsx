@@ -9,8 +9,9 @@ const StakingButton = () => {
 			className={cx(classes.stakeButton)}
 			component={Link}
 			href="/staking"
+			radius="md"
 		>
-			委任する
+			Staking
 		</Button>
 	);
 };

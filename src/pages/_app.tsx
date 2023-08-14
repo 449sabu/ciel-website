@@ -6,6 +6,7 @@ import {
 	ColorScheme,
 } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { Notifications } from "@mantine/notifications";
 import Layout from "@/components/Templates/Layout";
 
 export default function App(props: AppProps) {
@@ -46,36 +47,49 @@ export default function App(props: AppProps) {
 						shadows: {
 							outLight: "5px 5px 5px #b6b6b6, -5px -5px 5px #ffffff",
 							inLight: "inset 6px 6px 5px #d3d3d3, inset -6px -6px 5px #ffffff",
-							bothLight: "5px 5px 5px #b6b6b6, -5px -5px 5px #ffffff, inset 6px 6px 5px #d3d3d3, inset -6px -6px 5px #ffffff",
+							bothLight:
+								"5px 5px 5px #b6b6b6, -5px -5px 5px #ffffff, inset 6px 6px 5px #d3d3d3, inset -6px -6px 5px #ffffff",
 							outDark: "5px 5px 6px #1c1f22, -5px -5px 6px #363b42",
 							inDark: "inset 5px 5px 6px #1b1e22, inset -5px -5px 6px #373c43",
-							bothDark: "5px 5px 6px #1c1f22, -5px -5px 6px #363b42, inset 5px 5px 6px #1b1e22, inset -5px -5px 6px #373c43"
+							bothDark:
+								"5px 5px 6px #1c1f22, -5px -5px 6px #363b42, inset 5px 5px 6px #1b1e22, inset -5px -5px 6px #373c43",
 						},
-						// primaryShade: { light: 6, dark: 8 },
 						globalStyles: (theme) => ({
 							body: {
 								backgroundColor:
-									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+									theme.colorScheme === "dark"
+										? theme.colors.nmDark
+										: theme.colors.nmLight,
 							},
 							".nmOutline": {
 								border: "0.5rem solid",
-								borderColor: theme.colorScheme === "dark" ? theme.colors.nmDark : theme.colors.nmLight,
-								boxShadow : theme.colorScheme === "dark" ? theme.shadows.bothDark : theme.shadows.bothLight
+								borderColor:
+									theme.colorScheme === "dark"
+										? theme.colors.nmDark
+										: theme.colors.nmLight,
+								boxShadow:
+									theme.colorScheme === "dark"
+										? theme.shadows.bothDark
+										: theme.shadows.bothLight,
 							},
-							".fontNm": {
+							".nmFont": {
 								backgroundColor:
-									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+									theme.colorScheme === "dark"
+										? theme.colors.nmDark
+										: theme.colors.nmLight,
 								color:
-									theme.colorScheme === "dark" ? "rgb(41,45,50)" : "#F0F0F0",
+									theme.colorScheme === "dark"
+										? theme.colors.nmDark
+										: theme.colors.nmLight,
 								textShadow:
 									theme.colorScheme === "dark"
 										? "6px 6px 14px #1b1e22, -6px -6px 14px #373c43"
 										: "6px 6px 5px #d3d3d3, -6px -6px 5px #ffffff",
-								// : "6px 6px 12px #dadada, -6px -6px 12px #ffffff",
 							},
 						}),
 					}}
 				>
+					<Notifications position="top-center" />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>

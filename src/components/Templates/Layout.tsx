@@ -3,7 +3,6 @@ import {
 	AppShell,
 	Navbar,
 	Header,
-	Text,
 	MediaQuery,
 	Burger,
 	useMantineTheme,
@@ -12,13 +11,14 @@ import {
 } from "@mantine/core";
 import Navigation from "../Molecules/Navigation";
 import ColorSchemeToggle from "../Atoms/ColorSchemeToggle";
+import StakingButton from "@/components/Atoms/StakingButton";
 
 type LayoutProps = Required<{
 	readonly children: ReactElement | null;
 }>;
 
 const Layout = ({ children }: LayoutProps) => {
-	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+	const { colorScheme } = useMantineColorScheme();
 	const theme = useMantineTheme();
 	const [opened, setOpened] = useState(false);
 	const dark = colorScheme === "dark";
@@ -38,7 +38,6 @@ const Layout = ({ children }: LayoutProps) => {
 					bg={dark ? "rgb(41,45,50)" : "#F0F0F0"}
 					style={{
 						border: "none",
-						// justifyContent: "center",
 					}}
 				>
 					<Navbar.Section>
@@ -77,6 +76,7 @@ const Layout = ({ children }: LayoutProps) => {
 						</Group>
 					</MediaQuery>
 					<Group position="right" h={"100%"}>
+						<StakingButton />
 						<ColorSchemeToggle />
 					</Group>
 				</Header>

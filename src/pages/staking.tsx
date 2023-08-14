@@ -1,40 +1,69 @@
-import { Container, Text, Stepper, Button, Group, Box } from "@mantine/core";
-import { useState } from "react";
+import { Container, Text, Box, Timeline, Button } from "@mantine/core";
+import { useEffect } from "react";
+import ConnectWallet from "@/components/Atoms/ConnectWallet";
+import DelegationSteps from "@/components/Organisms/DelegationSteps";
+import { useStore } from "@/libs/zustand/store";
+import { fetchDelegationPool } from "@/libs/fetch";
+import { notifications } from "@mantine/notifications";
 
 const Staking = () => {
-	const [active, setActive] = useState(1);
-	const nextStep = () =>
-		setActive((current) => (current < 3 ? current + 1 : current));
-	const prevStep = () =>
-		setActive((current) => (current > 0 ? current - 1 : current));
+	const pool_id = process.env.NEXT_PUBLIC_POOL_ID || "";
+	const setMyPool = useStore((state) => state.setMyPool);
+	const connecting = useStore((state) => state.connecting);
+
+	useEffect(() => {
+		const myPoolInformation = async () => {
+			const data = await fetchDelegationPool(pool_id);
+			setMyPool(data);
+		};
+		myPoolInformation();
+	}, []);
+
+	// ウォレットが接続されるたびに検証
+	useEffect(() => {
+		console.log(connecting);
+		if (connecting.delegation === pool_id) {
+			notifications.show({
+				title: "Sucsess",
+				message: "このアドレスは、既に CIEL に委任しています。🙌",
+				color: "green",
+			});
+		} else {
+		}
+	}, [connecting]);
 
 	return (
 		<Container>
 			<Text>CIEL Staking Station へようこそ！</Text>
 			<Text>
-				ここでは、お持ちのウォレットの「dApp
+				お持ちのウォレットの「dApp
 				Connector」機能を利用して、安全に直接委任することができます。
 			</Text>
 
-			<Box my="4rem">
-				<Stepper active={active} onStepClick={setActive} breakpoint="sm">
-					<Stepper.Step label="First step" description="ウォレット選択">
-						委任するウォレットを選択してください。
-					</Stepper.Step>
-					<Stepper.Step label="Final step" description="委任">
-						委任情報を確認し、「委任する」ボタンを押してください。
-					</Stepper.Step>
-					<Stepper.Completed>
-						委任先の変更が完了しました！ ご委任いただきありがとうございます。
-					</Stepper.Completed>
-				</Stepper>
-
-				<Group position="center" mt="xl">
-					<Button variant="default" onClick={prevStep}>
-						Back
-					</Button>
-					<Button onClick={nextStep}>Next step</Button>
-				</Group>
+			<Text>
+				Staking
+				Stationは、コミュニティツールの「Lucid」と「Koios」を使用し、構築しています。
+			</Text>
+			<Box
+				my="1rem"
+				sx={(theme) => ({
+					boxShadow:
+						theme.colorScheme === "dark"
+							? theme.shadows.outDark
+							: theme.shadows.outLight,
+					padding: "2rem 4rem",
+					borderRadius: theme.radius.md,
+					maxWidth: "50rem",
+				})}
+			>
+				<Timeline active={0}>
+					<Timeline.Item title="ウォレットを接続する。" bulletSize={24}>
+						<ConnectWallet />
+					</Timeline.Item>
+					<Timeline.Item title="委任する。" bulletSize={24}>
+						<DelegationSteps />
+					</Timeline.Item>
+				</Timeline>
 			</Box>
 		</Container>
 	);
